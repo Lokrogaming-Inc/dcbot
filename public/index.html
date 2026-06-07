@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Discord Bot Control Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #050816;
+        --bg-alt: #0f172a;
+        --card: #0b1120;
+        --accent: #38bdf8;
+        --accent-soft: rgba(56, 189, 248, 0.1);
+        --border: #1e293b;
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --danger: #f97373;
+        --radius-lg: 14px;
+        --radius-md: 10px;
+        --shadow-soft: 0 22px 60px rgba(15, 23, 42, 0.85);
+        --shadow-sm: 0 12px 30px rgba(15, 23, 42, 0.75);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text',
+          sans-serif;
+        background: radial-gradient(circle at top left, #1d4ed8 0, transparent 55%),
+          radial-gradient(circle at bottom right, #06b6d4 0, transparent 50%),
+          var(--bg);
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      .app {
+        width: 100%;
+        max-width: 1080px;
+        background: linear-gradient(
+          140deg,
+          rgba(15, 23, 42, 0.96),
+          rgba(2, 6, 23, 0.98)
+        );
+        border-radius: 24px;
+        padding: 22px 22px 24px;
+        box-shadow: var(--shadow-soft);
+        border: 1px solid rgba(148, 163, 184, 0.16);
+        backdrop-filter: blur(18px);
+      }
+
+      .app-header {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px 18px;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid rgba(51, 65, 85, 0.9);
+      }
+
+      .title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: linear-gradient(
+          135deg,
+          rgba(56, 189, 248, 0.15),
+          rgba(129, 140, 248, 0.18)
+        );
+        border-radius: 999px;
+        padding: 4px 10px;
+        border: 1px solid rgba(59, 130, 246, 0.45);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+      }
+
+      .badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: #4ade80;
+        box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.25);
+      }
+
+      .title-main {
+        font-size: 19px;
+        font-weight: 650;
+        letter-spacing: 0.02em;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .title-sub {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .pill {
+        padding: 4px 9px;
+        font-size: 11px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.5);
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .pill-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: #22c55e;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: minmax(0, 2.1fr) minmax(0, 2.4fr);
+        gap: 18px;
+      }
+
+      @media (max-width: 860px) {
+        body {
+          padding: 16px;
+        }
+        .app {
+          padding: 18px 16px 20px;
+        }
+        .grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      .card {
+        background: radial-gradient(
+            circle at top,
+            rgba(129, 140, 248, 0.09),
+            transparent 58%
+          ),
+          var(--card);
+        border-radius: var(--radius-lg);
+        padding: 14px 14px 16px;
+        border: 1px solid rgba(51, 65, 85, 0.9);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .card-title {
+        font-size: 14px;
+        font-weight: 560;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        color: #cbd5f5;
+      }
+
+      .card-subtitle {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .bot-main {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 10px;
+      }
+
+      .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        background: radial-gradient(circle at 20% 0, #6366f1, #22d3ee 58%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 16px;
+        color: #020617;
+        border: 2px solid rgba(15, 23, 42, 0.9);
+        box-shadow: 0 14px 25px rgba(15, 23, 42, 0.9);
+      }
+
+      .bot-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .bot-name {
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .bot-tag {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 10px;
+      }
+
+      .chip {
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.55);
+        padding: 3px 8px;
+        font-size: 11px;
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+      }
+
+      .status-online {
+        background: #22c55e;
+      }
+      .status-idle {
+        background: #facc15;
+      }
+      .status-dnd {
+        background: #f97316;
+      }
+      .status-invisible {
+        background: #6b7280;
+      }
+
+      .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 4px;
+      }
+
+      .meta-item {
+        background: rgba(15, 23, 42, 0.9);
+        border-radius: var(--radius-md);
+        padding: 8px 9px;
+        border: 1px solid rgba(30, 64, 175, 0.6);
+        font-size: 11px;
+      }
+
+      .meta-label {
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        color: #64748b;
+        font-size: 10px;
+        margin-bottom: 3px;
+      }
+
+      .meta-value {
+        color: #e5e7eb;
+      }
+
+      .guilds {
+        margin-top: 10px;
+        max-height: 122px;
+        overflow: auto;
+        padding-right: 4px;
+      }
+
+      .guild-pill {
+        font-size: 11px;
+        padding: 5px 8px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin: 0 6px 6px 0;
+        background: rgba(15, 23, 42, 0.9);
+      }
+
+      .guild-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: #38bdf8;
+      }
+
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .field-row {
+        display: flex;
+        gap: 8px;
+      }
+
+      @media (max-width: 640px) {
+        .field-row {
+          flex-direction: column;
+        }
+      }
+
+      label {
+        font-size: 12px;
+        color: var(--muted);
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        flex: 1;
+      }
+
+      input,
+      select {
+        font: inherit;
+        padding: 7px 9px;
+        border-radius: 9px;
+        border: 1px solid rgba(30, 64, 175, 0.85);
+        background: radial-gradient(circle at top left, #020617, #020617 56%);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.12s ease, box-shadow 0.12s ease,
+          background 0.15s ease;
+      }
+
+      input::placeholder {
+        color: #64748b;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.7);
+        background: radial-gradient(circle at top left, #020617, #020617 70%);
+      }
+
+      .help-text {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 3px;
+      }
+
+      .button-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 8px;
+      }
+
+      button {
+        border: none;
+        font: inherit;
+        padding: 8px 14px;
+        border-radius: 999px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: transform 0.08s ease, box-shadow 0.08s ease,
+          background 0.18s ease;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #0ea5e9, #6366f1);
+        color: #0b1120;
+        font-weight: 580;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-size: 11px;
+        box-shadow: 0 14px 32px rgba(37, 99, 235, 0.7);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 38px rgba(37, 99, 235, 0.82);
+      }
+
+      .btn-primary:active {
+        transform: translateY(0);
+        box-shadow: 0 10px 22px rgba(15, 23, 42, 0.9);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: var(--muted);
+        font-size: 11px;
+        padding-inline: 6px;
+      }
+
+      .status-text {
+        font-size: 11px;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .status-pill {
+        padding: 3px 8px;
+        border-radius: 999px;
+        font-size: 11px;
+        border: 1px solid rgba(148, 163, 184, 0.75);
+      }
+
+      .error {
+        color: var(--danger);
+      }
+
+      .success {
+        color: #4ade80;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <div class="app-header">
+        <div>
+          <div class="title">
+            <div class="badge">
+              <span class="badge-dot"></span>
+              Control Panel · Local
+            </div>
+          </div>
+          <div class="title-main">
+            Discord Bot Dashboard
+          </div>
+          <div class="title-sub">
+            View bot information and adjust status, activity and name without
+            touching code.
+          </div>
+        </div>
+        <div>
+          <div class="pill">
+            <span class="pill-dot"></span>
+            <a href="https://discord.com/oauth2/authorize?client_id=1481685982590931028">Bot Invite</a>
+          </div>
+        </div>
+        <div>
+          <div class="pill">
+            <span class="pill-dot"></span>
+            Connected to your local bot
+          </div>
+        </div>
+      </div>
+
+      <div class="grid">
+        <section class="card" id="info-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Bot overview</div>
+              <div class="card-subtitle">
+                Basic information and current presence.
+              </div>
+            </div>
+          </div>
+
+          <div class="bot-main">
+            <div class="avatar" id="bot-avatar-fallback">DB</div>
+            <div class="bot-meta">
+              <div class="bot-name" id="bot-name">Loading...</div>
+              <div class="bot-tag" id="bot-tag">—</div>
+            </div>
+          </div>
+
+          <div class="chip-row">
+            <div class="chip" id="status-chip">
+              <span class="status-dot status-online" id="status-dot"></span>
+              <span id="status-label">Status: —</span>
+            </div>
+            <div class="chip">
+              Activity:
+              <span id="activity-label">—</span>
+            </div>
+          </div>
+
+          <div class="meta-grid">
+            <div class="meta-item">
+              <div class="meta-label">Bot ID</div>
+              <div class="meta-value" id="bot-id">—</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Created</div>
+              <div class="meta-value" id="created-at">—</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 10px">
+            <div class="meta-label">Guilds</div>
+            <div class="guilds" id="guilds"></div>
+          </div>
+
+          <div style="margin-top: 12px">
+            <div class="meta-label">Collected server data</div>
+            <div class="help-text">
+              Open the dedicated list page:
+              <a href="/serverlist.html">/serverlist.html</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="card" id="settings-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Presence & identity</div>
+              <div class="card-subtitle">
+                Change how the bot appears in Discord (owner only).
+              </div>
+            </div>
+          </div>
+
+          <form id="settings-form">
+            <div class="field-row">
+              <label>
+                Owner panel password
+                <input
+                  type="password"
+                  id="panel-password"
+                  placeholder="Same as PANEL_PASSWORD in .env"
+                  autocomplete="current-password"
+                />
+              </label>
+            </div>
+
+            <div class="field-row">
+              <label>
+                Status
+                <select id="status">
+                  <option value="online">Online</option>
+                  <option value="idle">Idle</option>
+                  <option value="dnd">Do Not Disturb</option>
+                  <option value="invisible">Invisible</option>
+                </select>
+              </label>
+              <label>
+                Activity type
+                <select id="activity-type">
+                  <option value="Playing">Playing</option>
+                  <option value="Listening">Listening</option>
+                  <option value="Watching">Watching</option>
+                  <option value="Competing">Competing</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="field-row">
+              <label>
+                Activity description
+                <input
+                  type="text"
+                  id="activity-text"
+                  placeholder="e.g. with APIs, on localhost"
+                  maxlength="128"
+                />
+              </label>
+            </div>
+
+            <div class="field-row">
+              <label>
+                Bot username
+                <input
+                  type="text"
+                  id="username"
+                  placeholder="Leave empty to keep current"
+                  maxlength="32"
+                />
+                <div class="help-text">
+                  Changing username is rate limited by Discord. Avoid doing this
+                  too often.
+                </div>
+              </label>
+            </div>
+
+            <div class="button-row">
+              <button type="submit" class="btn-primary">
+                <span>Save presence</span>
+              </button>
+              <div class="status-text">
+                <span id="status-message" class="">Panel ready.</span>
+              </div>
+              
+          </form>
+          
+        </section>
+        
+        <div class="field-row">
+          <label>
+            Reciever ID
+            <input
+              type="text"
+              id="recieverID"
+              placeholder="Reciever ID"
+              maxlength="128"
+            />
+            <div class="help-text">
+              Enter the ID of the user you want to send the DM to.
+            </div>
+      </div>
+      <div class="field-row">
+        <label>
+          Message
+          <input
+            type="text"
+            id="dmMessage"
+            placeholder="Message to send"
+            maxlength="2000"
+          />
+        </label>
+      </div>
+      
+    </div>
+    <div class="button-row">
+        <button id="sendDM" type="submit" class="btn-primary">
+          <span>Send DM</span>
+        </button>
+        <div class="field-row">
+          <label>
+            Newsletter Message
+            <input
+              type="text"
+              id="newsletterMessage"
+              placeholder="Newsletter message"
+              maxlength="2000"
+            />
+          </label>
+        </div>
+        
+        <div class="button-row">
+          <button id="sendNewsletter" class="btn-primary">
+            Send Newsletter
+          </button>
+        </div>
+    
+
+    <script>
+      const infoEls = {
+        name: document.getElementById('bot-name'),
+        tag: document.getElementById('bot-tag'),
+        id: document.getElementById('bot-id'),
+        createdAt: document.getElementById('created-at'),
+        statusDot: document.getElementById('status-dot'),
+        statusLabel: document.getElementById('status-label'),
+        activityLabel: document.getElementById('activity-label'),
+        guilds: document.getElementById('guilds'),
+        avatarFallback: document.getElementById('bot-avatar-fallback'),
+      };
+
+      const formEls = {
+        form: document.getElementById('settings-form'),
+        panelPassword: document.getElementById('panel-password'),
+        status: document.getElementById('status'),
+        activityType: document.getElementById('activity-type'),
+        activityText: document.getElementById('activity-text'),
+        username: document.getElementById('username'),
+        statusMessage: document.getElementById('status-message'),
+      };
+
+      function setStatusMessage(text, type) {
+        formEls.statusMessage.textContent = text;
+        formEls.statusMessage.className =
+          type === 'error' ? 'error' : type === 'success' ? 'success' : '';
+      }
+
+      function formatDate(isoString) {
+        try {
+          const d = new Date(isoString);
+          return d.toLocaleString();
+        } catch {
+          return isoString;
+        }
+      }
+
+      function applyStatusVisual(status) {
+        infoEls.statusDot.className = 'status-dot';
+        switch (status) {
+          case 'online':
+            infoEls.statusDot.classList.add('status-online');
+            break;
+          case 'idle':
+            infoEls.statusDot.classList.add('status-idle');
+            break;
+          case 'dnd':
+            infoEls.statusDot.classList.add('status-dnd');
+            break;
+          case 'invisible':
+            infoEls.statusDot.classList.add('status-invisible');
+            break;
+        }
+      }
+
+      async function loadInfo() {
+        try {
+          const res = await fetch('/api/info');
+          const data = await res.json();
+          if (!res.ok) {
+            throw new Error(data.error || 'Failed to load info');
+          }
+
+          const bot = data.bot || {};
+          const presence = data.presence || {};
+
+          infoEls.name.textContent = bot.username || '—';
+          infoEls.tag.textContent = bot.tag || '';
+          infoEls.id.textContent = bot.id || '—';
+          infoEls.createdAt.textContent = bot.createdAt
+            ? formatDate(bot.createdAt)
+            : '—';
+
+          const initials = (bot.username || 'DB')
+            .split(' ')
+            .map((p) => p[0])
+            .join('')
+            .slice(0, 2)
+            .toUpperCase();
+          infoEls.avatarFallback.textContent = initials;
+
+          const status = presence.status || 'online';
+          applyStatusVisual(status);
+          infoEls.statusLabel.textContent = 'Status: ' + status;
+
+          const activityText = presence.activityText || '—';
+          const activityType = presence.activityType || '—';
+          infoEls.activityLabel.textContent =
+            activityText && activityText !== '—'
+              ? activityType + ' ' + activityText
+              : '—';
+
+          formEls.status.value = status;
+          if (presence.activityType) {
+            formEls.activityType.value = presence.activityType;
+          }
+          formEls.activityText.value = presence.activityText || '';
+
+          formEls.username.value = '';
+
+          const guilds = data.guilds || [];
+          infoEls.guilds.innerHTML = '';
+          if (!guilds.length) {
+            const span = document.createElement('span');
+            span.textContent = 'Bot is not in any guilds yet.';
+            span.className = 'help-text';
+            infoEls.guilds.appendChild(span);
+          } else {
+            guilds.forEach((g) => {
+              const pill = document.createElement('span');
+              pill.className = 'guild-pill';
+              pill.innerHTML = `
+                <span class="guild-dot"></span>
+                <span>${g.name}</span>
+              `;
+              infoEls.guilds.appendChild(pill);
+            });
+          }
+
+          setStatusMessage('Info synced from bot.', 'success');
+        } catch (err) {
+          console.error(err);
+          setStatusMessage(
+            'Could not reach bot API. Is the server running?',
+            'error'
+          );
+        }
+      }
+
+
+      formEls.form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const body = {
+          status: formEls.status.value,
+          activityType: formEls.activityType.value,
+          activityText: formEls.activityText.value,
+          username: formEls.username.value || undefined,
+        };
+
+        const headers = {
+          'Content-Type': 'application/json',
+        };
+
+        const password = formEls.panelPassword.value.trim();
+        if (password) {
+          headers['x-panel-token'] = password;
+        }
+
+        setStatusMessage('Saving presence…');
+
+        try {
+          const res = await fetch('/api/settings', {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(body),
+          });
+          const data = await res.json();
+          if (!res.ok) {
+            throw new Error(data.error || 'Failed to save');
+          }
+
+          setStatusMessage('Presence updated.', 'success');
+          await loadInfo();
+        } catch (err) {
+          console.error(err);
+          setStatusMessage(err.message || 'Failed to update presence.', 'error');
+        }
+      });
+
+      loadInfo();
+      setInterval(loadInfo, 120000);
+
+      document.getElementById("sendDM").addEventListener("click", async (e) => {
+  e.preventDefault();
+
+  const userId = document.getElementById("recieverID").value.trim();
+  const message = document.getElementById("dmMessage").value.trim();
+  const password = document.getElementById("panel-password").value.trim();
+
+  if (!userId || !message) {
+    setStatusMessage("User ID and message required.", "error");
+    return;
+  }
+
+  const headers = {
+    "Content-Type": "application/json",
+  };
+
+  if (password) {
+    headers["x-panel-token"] = password;
+  }
+
+  try {
+    const res = await fetch("/api/dm", {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        userId,
+        message,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.error || "Failed to send DM");
+    }
+
+    setStatusMessage("DM sent successfully.", "success");
+  } catch (err) {
+    console.error(err);
+    setStatusMessage(err.message, "error");
+  }
+});
+document.getElementById("sendNewsletter").addEventListener("click", async () => {
+
+const message = document.getElementById("newsletterMessage").value.trim();
+const password = document.getElementById("panel-password").value.trim();
+
+if (!message) {
+  setStatusMessage("Newsletter message required.", "error");
+  return;
+}
+
+const headers = {
+  "Content-Type": "application/json"
+};
+
+if (password) {
+  headers["x-panel-token"] = password;
+}
+
+try {
+
+  const res = await fetch("/api/newsletter", {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ message })
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) throw new Error(data.error);
+
+  setStatusMessage(`Newsletter sent to ${data.delivered} servers.`, "success");
+
+} catch (err) {
+  setStatusMessage(err.message, "error");
+}
+
+});
+    </script>
+  </body>
+  </html>
+

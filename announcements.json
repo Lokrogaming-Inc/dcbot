@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1779185128313-hd52cczx",
+    "at": "2026-05-19T10:05:28.313Z",
+    "source": "command",
+    "message": "Test newsletter. Have you tried our dashboard? http://192.168.178.101:58997/",
+    "delivered": 11
+  },
+  {
+    "id": "1780572229077-wjlvvcij",
+    "at": "2026-06-04T11:23:49.077Z",
+    "source": "dashboard",
+    "message": "Bot is online again. Every Server/User promotion cooldown was resetted! try /promote now and invite the Bot to your own servers <https://discord.com/oauth2/authorize?client_id=1481685982590931028>",
+    "delivered": 11
+  }
+]

@@ -1,0 +1,191 @@
+{
+  "1227265647944273990": {
+    "id": "1227265647944273990",
+    "name": "LG Bot Server",
+    "icon": null,
+    "memberCount": 12,
+    "onlineCount": 8,
+    "invite": "https://discord.gg/THrbah4Hx3",
+    "inviteCreator": {
+      "id": "1481685982590931028",
+      "tag": "LokroBot (der aller echte)#7727"
+    },
+    "newsletter": true,
+    "newsletterChannelId": null,
+    "createdAt": "2024-04-09T14:35:31.963Z",
+    "updatedAt": "2026-06-07T04:28:55.801Z"
+  },
+  "1301611966657466399": {
+    "id": "1301611966657466399",
+    "name": "LokroGang",
+    "icon": "https://cdn.discordapp.com/icons/1301611966657466399/07f7b8e869d5612f2002561fa9d6f9be.webp?size=512",
+    "memberCount": 45,
+    "onlineCount": 14,
+    "invite": "https://discord.gg/DbR6hhFtT4",
+    "inviteCreator": {
+      "id": "1222617763063926938",
+      "tag": "lokrogamer"
+    },
+    "newsletter": true,
+    "newsletterChannelId": "1486659217636069438",
+    "createdAt": "2024-10-31T18:21:15.632Z",
+    "updatedAt": "2026-06-07T04:29:06.664Z"
+  },
+  "1354491439978905741": {
+    "id": "1354491439978905741",
+    "name": "Bündnis Kevin Teller 🚩🌈",
+    "icon": "https://cdn.discordapp.com/icons/1354491439978905741/1ba74c934d907ca1ecc498f89c9dc575.webp?size=512",
+    "memberCount": 235,
+    "onlineCount": 11,
+    "invite": "https://discord.gg/8yuHjgr4NQ",
+    "inviteCreator": {
+      "id": "1476282824398209195",
+      "tag": "VIKY#9731"
+    },
+    "newsletter": false,
+    "newsletterChannelId": null,
+    "createdAt": "2025-03-26T16:25:24.525Z",
+    "updatedAt": "2026-06-07T04:29:12.087Z"
+  },
+  "1416051067468382218": {
+    "id": "1416051067468382218",
+    "name": ".lol/deutschland | Gemeinschaft",
+    "icon": "https://cdn.discordapp.com/icons/1416051067468382218/3fd502446c4f0be83fe7a30530d8148e.webp?size=512",
+    "memberCount": 9,
+    "onlineCount": 8,
+    "invite": "https://discord.gg/FHk48ruz46",
+    "inviteCreator": {
+      "id": "1222617763063926938",
+      "tag": "lokrogamer"
+    },
+    "newsletter": true,
+    "newsletterChannelId": null,
+    "createdAt": "2025-09-12T13:21:23.441Z",
+    "updatedAt": "2026-06-07T04:29:28.499Z"
+  },
+  "1421201523643252839": {
+    "id": "1421201523643252839",
+    "name": "LokroGames",
+    "icon": "https://cdn.discordapp.com/icons/1421201523643252839/15013b49413aa821e6557213f4aac65d.webp?size=512",
+    "memberCount": 16,
+    "onlineCount": 8,
+    "invite": "https://discord.gg/4UPA4DYfFE",
+    "inviteCreator": {
+      "id": "1222617763063926938",
+      "tag": "lokrogamer"
+    },
+    "newsletter": true,
+    "newsletterChannelId": "1424460061857808386",
+    "createdAt": "2025-09-26T18:27:27.884Z",
+    "updatedAt": "2026-06-07T04:29:33.908Z"
+  },
+  "1465418496266469530": {
+    "id": "1465418496266469530",
+    "name": "Quantum Bot",
+    "icon": "https://cdn.discordapp.com/icons/1465418496266469530/ca225f9fa1618f89fc8952a683e8d5bc.webp?size=512",
+    "memberCount": 3,
+    "onlineCount": 1,
+    "invite": "https://discord.gg/5uhBTJ6eWk",
+    "inviteCreator": {
+      "id": "1481685982590931028",
+      "tag": "LokroBot (der aller echte)#7727"
+    },
+    "newsletter": true,
+    "newsletterChannelId": null,
+    "createdAt": "2026-01-26T18:49:55.669Z",
+    "updatedAt": "2026-06-07T04:29:39.258Z"
+  },
+  "1255808745187971103": {
+    "id": "1255808745187971103",
+    "name": "ReuClopps Discord",
+    "icon": "https://cdn.discordapp.com/icons/1255808745187971103/df019fde9092f70fe8d3842241df390f.webp?size=512",
+    "memberCount": 4,
+    "onlineCount": 3,
+    "invite": "https://discord.gg/NVgNhQp32a",
+    "inviteCreator": {
+      "id": "1222617763063926938",
+      "tag": "lokrogamer"
+    },
+    "newsletter": true,
+    "newsletterChannelId": null,
+    "createdAt": "2024-06-27T08:55:36.651Z",
+    "updatedAt": "2026-06-07T04:29:01.260Z"
+  },
+  "1486096099176349696": {
+    "id": "1486096099176349696",
+    "name": "Flycord",
+    "icon": "https://cdn.discordapp.com/icons/1486096099176349696/9d158816b81f39d757e2e85bc32b1600.webp?size=512",
+    "memberCount": 5,
+    "onlineCount": 4,
+    "invite": "https://discord.gg/CDdKK9fcpp",
+    "inviteCreator": {
+      "id": "1222617763063926938",
+      "tag": "lokrogamer"
+    },
+    "newsletter": true,
+    "newsletterChannelId": "1486096100124393514",
+    "createdAt": "2026-03-24T20:15:20.374Z",
+    "updatedAt": "2026-06-07T04:29:50.153Z"
+  },
+  "1375088464042786936": {
+    "id": "1375088464042786936",
+    "name": "Hawipy",
+    "icon": "https://cdn.discordapp.com/icons/1375088464042786936/e07c4fb127f53872c484be3b41ca6394.webp?size=512",
+    "memberCount": 11,
+    "onlineCount": 2,
+    "invite": "https://discord.gg/rPXVuV78EN",
+    "inviteCreator": {
+      "id": "1481685982590931028",
+      "tag": "LokroBot (der aller echte)#7727"
+    },
+    "newsletter": true,
+    "newsletterChannelId": null,
+    "createdAt": "2025-05-22T12:30:37.736Z",
+    "updatedAt": "2026-06-07T04:29:17.473Z"
+  },
+  "1479812778989719698": {
+    "id": "1479812778989719698",
+    "name": "Toast_TV",
+    "icon": "https://cdn.discordapp.com/icons/1479812778989719698/ad8c651069a7c293d48a94d2b0cdfcdc.webp?size=512",
+    "memberCount": 6,
+    "onlineCount": 2,
+    "invite": "https://discord.gg/G68e72Eyn4",
+    "inviteCreator": {
+      "id": "1481685982590931028",
+      "tag": "LokroBot (der aller echte)#7727"
+    },
+    "newsletter": true,
+    "newsletterChannelId": null,
+    "createdAt": "2026-03-07T12:07:40.103Z",
+    "updatedAt": "2026-06-07T04:29:44.640Z"
+  },
+  "1402750371301949610": {
+    "id": "1402750371301949610",
+    "name": "Air crusher survivor",
+    "icon": "https://cdn.discordapp.com/icons/1402750371301949610/6a10f38ffcce6d85eb747be68e88face.webp?size=512",
+    "memberCount": 6,
+    "onlineCount": 2,
+    "invite": "https://discord.gg/44y9bu74Qj",
+    "inviteCreator": null,
+    "newsletter": true,
+    "newsletterChannelId": null,
+    "createdAt": "2025-08-06T20:29:10.360Z",
+    "updatedAt": "2026-06-07T04:29:23.101Z"
+  },
+  "1486468599391719637": {
+    "id": "1486468599391719637",
+    "name": "LGG x Official",
+    "icon": "https://cdn.discordapp.com/icons/1486468599391719637/54de0db3dec9a7381e62eb3d6be50cc9.webp?size=512",
+    "memberCount": 12,
+    "onlineCount": 6,
+    "invite": "https://discord.gg/CM59ejfEua",
+    "inviteCreator": {
+      "id": "1222617763063926938",
+      "tag": "lokrogamer"
+    },
+    "newsletter": true,
+    "newsletterChannelId": "1487490064597516298",
+    "createdAt": "2026-03-25T20:55:31.346Z",
+    "updatedAt": "2026-06-07T04:29:55.501Z"
+  }
+}
