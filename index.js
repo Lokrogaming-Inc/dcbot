@@ -49,10 +49,10 @@ const client = new Client({
 
 
 const presenceState = {
-  status: 'dnd', // online | idle | dnd | invisible
-  activityText: 'mit Lokrogamer Zählen im BKT',
+  status: 'online', // online | idle | dnd | invisible
+  activityText: 'not set',
   activityType: 'Playing', // Playing | Listening | Watching | Competing
-  username: "LokroBot (der aller echte)",
+  username: "-",
 };
 
 // Generate session token
@@ -280,11 +280,7 @@ let globalBanLimits = fs.existsSync(globalBanLimitsFile)
 
   const protectedUsers = [
     "928021462386892830",
-    "1222617763063926938",
-    "547403919618211841",
-    "154589532384264192",
-    "1453137450678620190",
-    "334742694255656970"
+    process.env.OWNER_ID
   ];
 
   const commands = [
@@ -923,7 +919,7 @@ client.on("interactionCreate", async interaction => {
    if (interaction.isButton()) {
 
     if (interaction.customId === "get_role") {
-      const roleId = "1486753934633861310";
+      const roleId = process.env.PROMO_PING_ROLE_ID;
       const member = interaction.member;
 
       if (!member.roles.cache.has(roleId)) {
@@ -1168,7 +1164,7 @@ try {
 
   const guild = interaction.guild;
   const user = interaction.user;
-  const BOOST_GUILD_ID = "1301611966657466399";
+  const BOOST_GUILD_ID = process.env.SRVR_BOOST_ID;
 
    let boostMonths = 0;
    let boostMember = null;
@@ -1295,7 +1291,7 @@ if (boostMonths >= 12) {
   pingText = "@everyone";
 } else if (boostMonths >= 6) {
   pingText = `<@&${process.env.PROMOTEPING1ID}>`;
-} else if (interaction.user.id === "1222617763063926938") {
+} else if (interaction.user.id === process.env.BOT_OWNER_ID) {
   pingText = `<@&${process.env.PROMOTEPING1ID}>`;
 }
 await promoChannel.send({
