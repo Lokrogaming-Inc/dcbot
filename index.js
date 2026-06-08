@@ -23,7 +23,7 @@ const PANEL_PASSWORD = process.env.PANEL_PASSWORD;
 const PORT = process.env.PORT || 3000;
 const PUBLIC_STATUS_PORT = Number(process.env.PUBLIC_STATUS_PORT) || 3298;
 const PUBLIC_DATA_PORT = Number(process.env.PUBLIC_DATA_PORT) || 3299;
-const BOT_OWNER_ID = "1222617763063926938";
+const BOT_OWNER_ID = process.env.OWNER_ID;
 
 
 
