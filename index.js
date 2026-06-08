@@ -919,7 +919,7 @@ client.on("interactionCreate", async interaction => {
    if (interaction.isButton()) {
 
     if (interaction.customId === "get_role") {
-      const roleId = process.env.PROMO_PING_ROLE_ID;
+      const roleId = process.env.PROMOTEPING1ID;
       const member = interaction.member;
 
       if (!member.roles.cache.has(roleId)) {
